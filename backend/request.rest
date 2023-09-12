@@ -5,8 +5,17 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "name": "john",
-    "email": "john@gmail.com",
+    "name": "doe",
+    "email": "doe@gmail.com",
     "password": "password",
     "confPassword": "password"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "john@gmail.com",
+    "password": "password"
 }
