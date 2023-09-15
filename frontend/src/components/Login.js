@@ -52,7 +52,7 @@ const Login = () => {
                       placeholder="******"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      autocomplete="current-password"
+                      autoComplete="current-password"
                     />
                   </div>
                 </div>
