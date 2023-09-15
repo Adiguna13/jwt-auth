@@ -9,10 +9,14 @@ const Dashboard = () => {
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
+  const [users, setUsers] = useState([]);
+  const [showTable, setShowTable] = useState(false); // Track whether to show the table
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     refreshToken();
+    getUsers();
   }, []);
 
   const refreshToken = async () => {
@@ -50,12 +54,26 @@ const Dashboard = () => {
   );
 
   const getUsers = async () => {
-    const response = await axiosJWT.get("http://localhost:5000/users", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(response.data);
+    try {
+      const response = await axiosJWT.get("http://localhost:5000/users", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      if (error.response && error.response.status === 401) {
+        setError("Authentication failed. Please log in."); // Set custom error message
+      } else {
+        setError("An error occurred while fetching users."); // Set a generic error message
+      }
+    }
+  };
+
+  const handleShowTable = () => {
+    // setShowTable(true);
+    setShowTable((prevShowTable) => !prevShowTable);
   };
 
   return (
@@ -64,9 +82,32 @@ const Dashboard = () => {
         <h1>
           <b>Welcome Back: {name} </b>
         </h1>
-        <button className="button is-info" onClick={getUsers}>
+        {/* <button className="button is-info" onClick={getUsers}>
           Get Users
+        </button> */}
+        <button className="button is-info" onClick={handleShowTable}>
+          Show Users
         </button>
+        {showTable && ( // Render the table only when showTable is true
+          <table className="table is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{index + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </Layout>
   );
