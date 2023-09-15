@@ -8,7 +8,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const [msg, setMsg] = useState("");
-  // const history = useNavigate();
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Register = () => {
         confPassword: confPassword,
       });
       console.log("Registration successful");
-      useNavigate("/");
+      navigate("/");
     } catch (error) {
       if (error.response) {
         setMsg(error.response.data.msg);

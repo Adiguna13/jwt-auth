@@ -15,11 +15,12 @@ const Navbar = () => {
               src="https://bulma.io/images/bulma-logo.png"
               width="112"
               height="28"
-              alt="alt"
+              alt="logo"
             />
           </a>
 
           <a
+            href="/"
             role="button"
             className="navbar-burger burger"
             aria-label="menu"
@@ -34,13 +35,15 @@ const Navbar = () => {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item">Home</a>
+            <a href="/" className="navbar-item">
+              Home
+            </a>
           </div>
 
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-light">Log out</a>
+                <button className="button is-light">Log out</button>
               </div>
             </div>
           </div>

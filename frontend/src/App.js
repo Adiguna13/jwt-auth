@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 
 function App() {
@@ -12,10 +12,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-      {/* <Navbar /> */}
-      {/* <Routes>
-        
-      </Routes> */}
     </BrowserRouter>
   );
 }
